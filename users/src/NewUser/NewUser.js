@@ -14,8 +14,9 @@ export default class NewUser extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
-            <div className='newUser'>
+            <>
                 <input
                     name='name'
                     onChange={this.handleChanges}
@@ -33,10 +34,10 @@ export default class NewUser extends Component {
                             name: '',
                             bio: ''
                         })
-                        this.props.newUser(this.state)
+                        this.props.newUser()
                     }}
                 >Submit</button>
-            </div>
+            </>
         )
     }
 }

@@ -40,13 +40,19 @@ class App extends React.Component {
       })
   }
 
-  editUser = (user, id) => {
+  editUser = (userSub, id) => {
     axios
-      .put(`http://localhost:5000/api/users/${id}`, user)
+      .put(`http://localhost:5000/api/users/${id}`, userSub)
       .then(res => {
         this.setState({
           ...this.state,
-          users: res.data
+          users: this.state.users.map(user => {
+            if (user.id === id) {
+              user.name = userSub.name;
+              user.bio = userSub.bio;
+            }
+            return user
+          })
         })
       })
       .catch(err => console.log(err))
@@ -56,7 +62,9 @@ class App extends React.Component {
     axios
       .delete(`http://localhost:5000/api/users/${id}`)
       .then(res => {
-        console.log(res)
+        this.setState({
+          users: this.state.users.filter(user => user.id !== id)
+        })
       })
       .catch(err => console.log(err))
   }

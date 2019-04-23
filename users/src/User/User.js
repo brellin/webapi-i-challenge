@@ -60,12 +60,19 @@ class User extends React.Component {
                     this.props.user.bio
                 }</p>
                 <button
-                    onClick={() => {
-                        this.props.editing ?
-                            this.editUser() :
-                            this.props.delUser(this.props.user.id)
+                    style={{
+                        display: this.state.editing ?
+                            'none' : 'block'
                     }}
-                >{this.state.editing ? 'Submit' : 'Delete'}</button>
+                    onClick={() => this.props.delUser(this.props.user.id)}
+                >Delete</button>
+                <button
+                    style={{
+                        display: !this.state.editing ?
+                            'none' : 'block'
+                    }}
+                    onClick={() => this.editUser()}
+                >Submit</button>
             </div >
         )
     }
